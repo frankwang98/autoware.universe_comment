@@ -47,6 +47,7 @@ GNSSPoser::GNSSPoser(const rclcpp::NodeOptions & node_options)
   int buff_epoch = declare_parameter<int>("buff_epoch");
   position_buffer_.set_capacity(buff_epoch);
 
+  // 订阅fix话题
   nav_sat_fix_sub_ = create_subscription<sensor_msgs::msg::NavSatFix>(
     "fix", rclcpp::QoS{1}, std::bind(&GNSSPoser::callbackNavSatFix, this, std::placeholders::_1));
   autoware_orientation_sub_ =
@@ -70,6 +71,7 @@ void GNSSPoser::callbackNavSatFix(
   const sensor_msgs::msg::NavSatFix::ConstSharedPtr nav_sat_fix_msg_ptr)
 {
   // Return immediately if map_projector_info has not been received yet.
+  // 没有地图信息立即退出
   if (!received_map_projector_info_) {
     RCLCPP_WARN_THROTTLE(
       this->get_logger(), *this->get_clock(), std::chrono::milliseconds(1000).count(),
@@ -101,7 +103,7 @@ void GNSSPoser::callbackNavSatFix(
     return;
   }
 
-  // get position
+  // get position 获取位置
   geographic_msgs::msg::GeoPoint gps_point;
   gps_point.latitude = nav_sat_fix_msg_ptr->latitude;
   gps_point.longitude = nav_sat_fix_msg_ptr->longitude;
@@ -113,7 +115,7 @@ void GNSSPoser::callbackNavSatFix(
 
   geometry_msgs::msg::Pose gnss_antenna_pose{};
 
-  // publish pose immediately
+  // publish pose immediately 发布位姿
   if (!gnss_pose_pub_method) {
     gnss_antenna_pose.position = position;
   } else {
@@ -130,7 +132,7 @@ void GNSSPoser::callbackNavSatFix(
                                                              : getMedianPosition(position_buffer_);
   }
 
-  // calc gnss antenna orientation
+  // calc gnss antenna orientation 计算朝向
   geometry_msgs::msg::Quaternion orientation;
   if (use_gnss_ins_orientation_) {
     orientation = msg_gnss_ins_orientation_stamped_->orientation.orientation;
@@ -192,7 +194,7 @@ void GNSSPoser::callbackNavSatFix(
 
   pose_cov_pub_->publish(gnss_base_pose_cov_msg);
 
-  // broadcast map to gnss_base_link
+  // broadcast map to gnss_base_link 广播TF
   publishTF(map_frame_, gnss_base_frame_, gnss_base_pose_msg);
 }
 

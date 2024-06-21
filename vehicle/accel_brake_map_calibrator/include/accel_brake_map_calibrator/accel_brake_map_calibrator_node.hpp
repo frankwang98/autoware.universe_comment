@@ -85,6 +85,9 @@ struct DataStamped
 };
 using DataStampedPtr = std::shared_ptr<DataStamped>;
 
+/**
+ * @brief 主类，车辆数据采集与标定
+ */
 class AccelBrakeMapCalibrator : public rclcpp::Node
 {
 private:
@@ -230,6 +233,12 @@ private:
   // output log
   std::ofstream output_log_;
 
+  /**
+   * @brief Get the Current Pitch From TF
+   * @param pitch 
+   * @return true 
+   * @return false 
+   */
   bool getCurrentPitchFromTF(double * pitch);
   void timerCallback();
   void timerCallbackOutputCSV();
@@ -244,6 +253,8 @@ private:
     const int brake_pedal_index, const int brake_vel_index, const double measured_acc,
     const double map_acc);
   void updateTotalMapOffset(const double measured_acc, const double map_acc);
+
+  // ROS callback
   void callbackActuation(
     const std_msgs::msg::Header header, const double accel, const double brake);
   void callbackActuationCommand(const ActuationCommandStamped::ConstSharedPtr msg);
@@ -253,6 +264,7 @@ private:
   bool callbackUpdateMapService(
     const std::shared_ptr<rmw_request_id_t> request_header,
     UpdateAccelBrakeMap::Request::SharedPtr req, UpdateAccelBrakeMap::Response::SharedPtr res);
+  
   bool getAccFromMap(const double velocity, const double pedal);
   double lowpass(const double original, const double current, const double gain = 0.8);
   double getPedalSpeed(

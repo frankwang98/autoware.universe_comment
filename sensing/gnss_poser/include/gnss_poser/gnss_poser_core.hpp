@@ -50,6 +50,11 @@ private:
   using MapProjectorInfo = map_interface::MapProjectorInfo;
 
   void callbackMapProjectorInfo(const MapProjectorInfo::Message::ConstSharedPtr msg);
+
+  /**
+   * @brief fix callback
+   * @param nav_sat_fix_msg_ptr 
+   */
   void callbackNavSatFix(const sensor_msgs::msg::NavSatFix::ConstSharedPtr nav_sat_fix_msg_ptr);
   void callbackGnssInsOrientationStamped(
     const autoware_sensing_msgs::msg::GnssInsOrientationStamped::ConstSharedPtr msg);
