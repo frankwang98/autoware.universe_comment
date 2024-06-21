@@ -1,32 +1,15 @@
-# Prerequisites
-*.d
+# Vim
+*.swp
+*.swo
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# Visual Studio Code
+.vscode/
+*.code-workspace
 
-# Precompiled Headers
-*.gch
-*.pch
+# colcon
+build/
+install/
+log/
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+# Python
+*.pyc
