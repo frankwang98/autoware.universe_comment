@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The `pose_initializer` is the package to send an initial pose to `ekf_localizer`.
+The `pose_initializer` is the package to send an initial pose to `ekf_localizer`. 初始化位置发到扩展卡尔曼
 It receives roughly estimated initial pose from GNSS/user.
 Passing the pose to `ndt_scan_matcher`, and it gets a calculated ego pose from `ndt_scan_matcher` via service.
 Finally, it publishes the initial pose to `ekf_localizer`.

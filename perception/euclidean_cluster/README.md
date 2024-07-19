@@ -14,7 +14,7 @@ This package has two clustering methods: `euclidean_cluster` and `voxel_grid_bas
 
 `pcl::EuclideanClusterExtraction` is applied to points. See [official document](https://pcl.readthedocs.io/projects/tutorials/en/master/cluster_extraction.html) for details.
 
-### voxel_grid_based_euclidean_cluster
+### voxel_grid_based_euclidean_cluster 基于降采样和地面过滤的聚类
 
 1. A centroid in each voxel is calculated by `pcl::VoxelGrid`.
 2. The centroids are clustered by `pcl::EuclideanClusterExtraction`.

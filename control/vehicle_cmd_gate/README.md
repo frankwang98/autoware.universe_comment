@@ -2,7 +2,7 @@
 
 ## Purpose
 
-`vehicle_cmd_gate` is the package to get information from emergency handler, planning module, external controller, and send a msg to vehicle.
+`vehicle_cmd_gate` is the package to get information from emergency handler, planning module, external controller, and send a msg to vehicle. 接收急停指令、规划模块、外在控制模块，发送消息到车端
 
 ## Inputs / Outputs
 

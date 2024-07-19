@@ -6,7 +6,7 @@
 <img src="./media/diagnostics.png" width="400">
 </p>
 
-localization_error_monitor is a package for diagnosing localization errors by monitoring uncertainty of the localization results.
+localization_error_monitor is a package for diagnosing localization errors by monitoring uncertainty of the localization results. 定位错误监控
 The package monitors the following two values:
 
 - size of long radius of confidence ellipse

@@ -68,6 +68,7 @@ using visualization_msgs::msg::Marker;
 using visualization_msgs::msg::MarkerArray;
 using Path = std::vector<geometry_msgs::msg::Pose>;
 using Vector3 = geometry_msgs::msg::Vector3;
+// 障碍物结构
 struct ObjectData
 {
   rclcpp::Time stamp;
@@ -232,6 +233,10 @@ static rclcpp::SensorDataQoS SingleDepthSensorQoS()
   return qos;
 }
 
+/**
+ * @class AEB
+ * @brief AEB算法
+ */
 class AEB : public rclcpp::Node
 {
 public:

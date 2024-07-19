@@ -2,7 +2,7 @@
 
 ## Purpose
 
-`shift_decider` is a module to decide shift from ackermann control command.
+`shift_decider` is a module to decide shift from ackermann control command. 决定是否换挡
 
 ## Inner-workings / Algorithms
 

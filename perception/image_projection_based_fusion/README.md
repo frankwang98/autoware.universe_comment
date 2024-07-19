@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The `image_projection_based_fusion` is a package to fuse detected obstacles (bounding box or segmentation) from image and 3d pointcloud or obstacles (bounding box, cluster or segmentation).
+The `image_projection_based_fusion` is a package to fuse detected obstacles (bounding box or segmentation) from image and 3d pointcloud or obstacles (bounding box, cluster or segmentation). 将点云和图像检测的目标进行融合投影
 
 ## Inner-workings / Algorithms
 

@@ -1,14 +1,14 @@
 # Lane Departure Checker
 
-The **Lane Departure Checker** checks if vehicle follows a trajectory. If it does not follow the trajectory, it reports its status via `diagnostic_updater`.
+The **Lane Departure Checker** checks if vehicle follows a trajectory. If it does not follow the trajectory, it reports its status via `diagnostic_updater`. 检查车辆是否偏离轨迹（车道偏离预警）
 
 ## Features
 
 This package includes the following features:
 
-- **Lane Departure**: Check if ego vehicle is going to be out of lane boundaries based on output from control module (predicted trajectory).
-- **Trajectory Deviation**: Check if ego vehicle's pose does not deviate from the trajectory. Checking lateral, longitudinal and yaw deviation.
-- **Road Border Departure**: Check if ego vehicle's footprint, generated from the control's output, extends beyond the road border.
+- **Lane Departure**: Check if ego vehicle is going to be out of lane boundaries based on output from control module (predicted trajectory). 看预测的轨迹是否要偏离车道
+- **Trajectory Deviation**: Check if ego vehicle's pose does not deviate from the trajectory. Checking lateral, longitudinal and yaw deviation. 看车辆轨迹是否偏离
+- **Road Border Departure**: Check if ego vehicle's footprint, generated from the control's output, extends beyond the road border. 看是否超出道路边界
 
 ## Inner-workings / Algorithms
 

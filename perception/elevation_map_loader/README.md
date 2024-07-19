@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This package provides elevation map for compare_map_segmentation.
+This package provides elevation map for compare_map_segmentation. 高程地图加载
 
 ## Inner-workings / Algorithms
 

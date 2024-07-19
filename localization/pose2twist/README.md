@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This `pose2twist` calculates the velocity from the input pose history. In addition to the computed twist, this node outputs the linear-x and angular-z components as a float message to simplify debugging.
+This `pose2twist` calculates the velocity from the input pose history. In addition to the computed twist, this node outputs the linear-x and angular-z components as a float message to simplify debugging. 根据历史姿态计算速度
 
 The `twist.linear.x` is calculated as `sqrt(dx * dx + dy * dy + dz * dz) / dt`, and the values in the `y` and `z` fields are zero.
 The `twist.angular` is calculated as `d_roll / dt`, `d_pitch / dt` and `d_yaw / dt` for each field.

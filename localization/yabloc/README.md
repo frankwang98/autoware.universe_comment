@@ -6,7 +6,7 @@
 
 It estimates position by matching road surface markings extracted from images with a vector map.
 Point cloud maps and LiDAR are not required.
-YabLoc enables users localize vehicles that are not equipped with LiDAR and in environments where point cloud maps are not available.
+YabLoc enables users localize vehicles that are not equipped with LiDAR and in environments where point cloud maps are not available. 从图像提取的标记和矢量地图作比较，来确定车辆位置
 
 ## Packages
 

@@ -22,9 +22,9 @@ when following a path.
 
 The node uses an implementation of linear model predictive control (MPC) for accurate path tracking.
 The MPC uses a model of the vehicle to simulate the trajectory resulting from the control command.
-The optimization of the control command is formulated as a Quadratic Program (QP).
+The optimization of the control command is formulated as a Quadratic Program (QP). 二次优化
 
-Different vehicle models are implemented:
+Different vehicle models are implemented: 不同的车辆模型
 
 - kinematics : bicycle kinematics model with steering 1st-order delay.
 - kinematics_no_delay : bicycle kinematics model without steering delay.

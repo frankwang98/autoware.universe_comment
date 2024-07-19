@@ -1,6 +1,6 @@
 # pose_instability_detector
 
-The `pose_instability_detector` package includes a node designed to monitor the stability of `/localization/kinematic_state`, which is an output topic of the Extended Kalman Filter (EKF).
+The `pose_instability_detector` package includes a node designed to monitor the stability of `/localization/kinematic_state`, which is an output topic of the Extended Kalman Filter (EKF). 定位稳定性监测
 
 This node triggers periodic timer callbacks to compare two poses:
 

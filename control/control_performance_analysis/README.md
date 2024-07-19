@@ -2,10 +2,10 @@
 
 ## Purpose
 
-`control_performance_analysis` is the package to analyze the tracking performance of a control module and monitor the driving status of the vehicle.
+`control_performance_analysis` is the package to analyze the tracking performance of a control module and monitor the driving status of the vehicle. 分析控制模块轨迹跟踪表现和监控车辆驾驶状态
 
 This package is used as a tool to quantify the results of the control module.
-That's why it doesn't interfere with the core logic of autonomous driving.
+That's why it doesn't interfere with the core logic of autonomous driving. 只是一个数据工具
 
 Based on the various input from planning, control, and vehicle, it publishes the result of analysis as `control_performance_analysis::msg::ErrorStamped` defined in this package.
 

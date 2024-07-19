@@ -2,14 +2,14 @@
 
 ## Purpose / Use cases
 
-This module is responsible for managing the different modes of operation for the Autoware system. The possible modes are:
+This module is responsible for managing the different modes of operation for the Autoware system. The possible modes are: 管理不同的操作模式 自动/人工/远程/急停
 
 - `Autonomous`: the vehicle is fully controlled by the autonomous driving system
 - `Local`: the vehicle is controlled by a physically connected control system such as a joy stick
 - `Remote`: the vehicle is controlled by a remote controller
 - `Stop`: the vehicle is stopped and there is no active control system.
 
-There is also an `In Transition` state that occurs during each mode transitions. During this state, the transition to the new operator is not yet complete, and the previous operator is still responsible for controlling the system until the transition is complete. Some actions may be restricted during the `In Transition` state, such as sudden braking or steering. (This is restricted by the `vehicle_cmd_gate`).
+There is also an `In Transition` state that occurs during each mode transitions. During this state, the transition to the new operator is not yet complete, and the previous operator is still responsible for controlling the system until the transition is complete. Some actions may be restricted during the `In Transition` state, such as sudden braking or steering. (This is restricted by the `vehicle_cmd_gate`). 在每个状态转换时有个中间状态，中间状态时一些动作会被限制
 
 ### Features
 
@@ -26,6 +26,7 @@ There is also an `In Transition` state that occurs during each mode transitions.
 ## Design
 
 A rough design of the relationship between `operation_mode_transition_manager`` and the other nodes is shown below.
+模式切换流程图
 
 ![transition_rough_structure](image/transition_rough_structure.drawio.svg)
 

@@ -6,7 +6,7 @@ The Predicted Path Checker package is designed for autonomous vehicles to check 
 modules. It handles potential collisions that the planning module might not be able to handle and that in the brake
 distance. In case of collision in brake distance, the package will send a diagnostic message labeled "ERROR" to alert
 the system to send emergency and in the case of collisions in outside reference trajectory, it sends pause request to
-pause interface to make the vehicle stop.
+pause interface to make the vehicle stop. 检查预测轨迹是否合理
 
 ![general-structure.png](images%2Fgeneral-structure.png)
 
@@ -14,7 +14,7 @@ pause interface to make the vehicle stop.
 
 The package algorithm evaluates the predicted trajectory against the reference trajectory and the predicted objects in
 the environment. It checks for potential collisions and, if necessary, generates an appropriate response to avoid them (
-emergency or pause request).
+emergency or pause request). 参考轨迹和预测轨迹进行评估
 
 ### Inner Algorithm
 
@@ -22,17 +22,17 @@ emergency or pause request).
 
 **cutTrajectory() ->** It cuts the predicted trajectory with input length. Length is calculated by multiplying the
 velocity
-of ego vehicle with "trajectory_check_time" parameter and "min_trajectory_length".
+of ego vehicle with "trajectory_check_time" parameter and "min_trajectory_length". 剪切轨迹
 
 **filterObstacles() ->** It filters the predicted objects in the environment. It filters the objects which are not in
-front of the vehicle and far away from predicted trajectory.
+front of the vehicle and far away from predicted trajectory. 过滤障碍物
 
 **checkTrajectoryForCollision() ->** It checks the predicted trajectory for collision with the predicted objects. It
 calculates both polygon of trajectory points and predicted objects and checks intersection of both polygons. If there is
 an intersection, it calculates the nearest collision point. It returns the nearest collision point of polygon and the
 predicted object. It also checks predicted objects history which are intersect with the footprint before to avoid
 unexpected behaviors. Predicted objects history stores the objects if it was detected below the "chattering_threshold"
-seconds ago.
+seconds ago. 检查估计是否会碰撞
 
 If the "enable_z_axis_obstacle_filtering" parameter is set to true, it filters the predicted objects in the Z-axis by
 using "z_axis_filtering_buffer". If the object does not intersect with the Z-axis, it is filtered out.
@@ -40,18 +40,18 @@ using "z_axis_filtering_buffer". If the object does not intersect with the Z-axi
 ![Z_axis_filtering.png](images%2FZ_axis_filtering.png)
 
 **calculateProjectedVelAndAcc() ->** It calculates the projected velocity and acceleration of the predicted object on
-predicted trajectory's collision point's axes.
+predicted trajectory's collision point's axes. 计算投影速度和加速度
 
 **isInBrakeDistance() ->** It checks if the stop point is in brake distance. It gets relative velocity and
 acceleration of ego vehicle with respect to the predicted object. It calculates the brake distance, if the point in
-brake distance, it returns true.
+brake distance, it returns true. 是否在制动距离内
 
 **isItDiscretePoint() ->** It checks if the stop point on predicted trajectory is discrete point or not. If it is not
-discrete point, planning should handle the stop.
+discrete point, planning should handle the stop. 是否是分离点/停止点
 
 **isThereStopPointOnRefTrajectory() ->** It checks if there is a stop point on reference trajectory. If there is a stop
 point before the stop index, it returns true. Otherwise, it returns false, and node is going to call pause interface to
-make the vehicle stop.
+make the vehicle stop. 是否有停止点在参考轨迹上
 
 ## Inputs
 

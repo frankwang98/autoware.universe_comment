@@ -2,12 +2,12 @@
 
 ## Purpose
 
-ndt_scan_matcher is a package for position estimation using the NDT scan matching method.
+ndt_scan_matcher is a package for position estimation using the NDT scan matching method. MDT扫描和匹配
 
 There are two main functions in this package:
 
-- estimate position by scan matching
-- estimate initial position via the ROS service using the Monte Carlo method
+- estimate position by scan matching 实时预测位置
+- estimate initial position via the ROS service using the Monte Carlo method 通过ros服务初始化位置
 
 One optional function is regularization. Please see the regularization chapter in the back for details. It is disabled by default.
 

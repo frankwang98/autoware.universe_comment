@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This package provides nodes that generate metrics to evaluate the quality of planning and control.
+This package provides nodes that generate metrics to evaluate the quality of planning and control. 评价规划和控制的效果
 
 ## Inner-workings / Algorithms
 

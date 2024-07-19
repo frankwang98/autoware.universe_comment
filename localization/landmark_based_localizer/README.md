@@ -1,11 +1,11 @@
 # Landmark Based Localizer
 
-This directory contains packages for landmark-based localization.
+This directory contains packages for landmark-based localization. 基于标签的定位
 
 Landmarks are, for example
 
-- AR tags detected by camera
-- Boards characterized by intensity detected by LiDAR
+- AR tags detected by camera 例如，相机检测AR标签
+- Boards characterized by intensity detected by LiDAR 深度检测板子
 
 etc.
 

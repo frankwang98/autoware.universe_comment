@@ -1,6 +1,6 @@
 # map_loader package
 
-This package provides the features of loading various maps.
+This package provides the features of loading various maps. 加载不同的地图
 
 ## pointcloud_map_loader
 

@@ -14,7 +14,7 @@ We can implement a detailed controller by deriving the longitudinal and lateral 
 ## Design
 
 There are lateral and longitudinal base interface classes and each algorithm inherits from this class to implement.
-The interface class has the following base functions.
+The interface class has the following base functions. 横纵向控制接口，基础函数有以下
 
 - `isReady()`: Check if the control is ready to compute.
 - `run()`: Compute control commands and return to [Trajectory Follower Nodes](../trajectory_follower_node/README.md). This must be implemented by inherited algorithms.
@@ -25,7 +25,7 @@ The interface class has the following base functions.
 
 See [the Design of Trajectory Follower Nodes](../trajectory_follower_node/README.md#Design) for how these functions work in the node.
 
-## Separated lateral (steering) and longitudinal (velocity) controls
+## Separated lateral (steering) and longitudinal (velocity) controls 横纵向控制分离
 
 This longitudinal controller assumes that the roles of lateral and longitudinal control are separated as follows.
 
@@ -34,7 +34,7 @@ This longitudinal controller assumes that the roles of lateral and longitudinal 
 
 Ideally, dealing with the lateral and longitudinal control as a single mixed problem can achieve high performance. In contrast, there are two reasons to provide velocity controller as a stand-alone function, described below.
 
-### Complex requirements for longitudinal motion
+### Complex requirements for longitudinal motion 纵向运动的复杂要求
 
 The longitudinal vehicle behavior that humans expect is difficult to express in a single logic. For example, the expected behavior just before stopping differs depending on whether the ego-position is ahead/behind of the stop line, or whether the current speed is higher/lower than the target speed to achieve a human-like movement.
 
@@ -42,7 +42,7 @@ In addition, some vehicles have difficulty measuring the ego-speed at extremely 
 
 There are many characteristics and needs that are unique to longitudinal control. Designing them separately from the lateral control keeps the modules less coupled and improves maintainability.
 
-### Nonlinear coupling of lateral and longitudinal motion
+### Nonlinear coupling of lateral and longitudinal motion 横向和纵向运动的非线性耦合
 
 The lat-lon mixed control problem is very complex and uses nonlinear optimization to achieve high performance. Since it is difficult to guarantee the convergence of the nonlinear optimization, a simple control logic is also necessary for development.
 

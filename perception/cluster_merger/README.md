@@ -2,7 +2,7 @@
 
 ## Purpose
 
-cluster_merger is a package for merging pointcloud clusters as detected objects with feature type.
+cluster_merger is a package for merging pointcloud clusters as detected objects with feature type. 聚类合并，即将点云聚类的结果合并成一些特征
 
 ## Inner-working / Algorithms
 

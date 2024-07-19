@@ -3,7 +3,7 @@
 ## Feature
 
 `map_projection_loader` is responsible for publishing `map_projector_info` that defines in which kind of coordinate Autoware is operating.
-This is necessary information especially when you want to convert from global (geoid) to local coordinate or the other way around.
+This is necessary information especially when you want to convert from global (geoid) to local coordinate or the other way around. 投影地图加载，这是必要的对全局到局部坐标系的转变
 
 - If `map_projector_info_path` DOES exist, this node loads it and publishes the map projection information accordingly.
 - If `map_projector_info_path` does NOT exist, the node assumes that you are using the `MGRS` projection type, and loads the lanelet2 map instead to extract the MGRS grid.
@@ -38,8 +38,8 @@ The functionality that requires latitude and longitude will become unavailable.
 
 The currently identified unavailable functionalities are:
 
-- GNSS localization
-- Sending the self-position in latitude and longitude using ADAPI
+- GNSS localization gnss定位
+- Sending the self-position in latitude and longitude using ADAPI 发送经纬度信息
 
 ### Using MGRS
 

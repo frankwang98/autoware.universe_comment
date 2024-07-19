@@ -4,25 +4,27 @@
 
 `autonomous_emergency_braking` is a module that prevents collisions with obstacles on the predicted path created by a control module or sensor values estimated from the control module.
 
+防止车辆与参考轨迹上的障碍物发生碰撞。
+
 ### Assumptions
 
 This module has following assumptions.
 
-- It is used when driving at low speeds (about 15 km/h).
+- It is used when driving at low speeds (about 15 km/h). 用于低速行驶时，一般在15km/h以内
 
-- The predicted path of the ego vehicle can be made from either the path created from sensors or the path created from a control module, or both.
+- The predicted path of the ego vehicle can be made from either the path created from sensors or the path created from a control module, or both. 自车预测轨迹由传感器或控制模块生成
 
-- The current speed and angular velocity can be obtained from the sensors of the ego vehicle, and it uses point cloud as obstacles.
+- The current speed and angular velocity can be obtained from the sensors of the ego vehicle, and it uses point cloud as obstacles. 车辆能通过传感器获取自车速度和角速度（目前使用IMU的角速度），用点云表示障碍物
 
 ![aeb_range](./image/range.drawio.svg)
 
 ### Limitations
 
-- AEB might not be able to react with obstacles that are close to the ground. It depends on the performance of the pre-processing methods applied to the point cloud.
+- AEB might not be able to react with obstacles that are close to the ground. It depends on the performance of the pre-processing methods applied to the point cloud. 可能无法获取较小贴近地面的障碍物
 
-- Longitudinal acceleration information obtained from sensors is not used due to the high amount of noise.
+- Longitudinal acceleration information obtained from sensors is not used due to the high amount of noise. 传感器获取的纵向加速度信息没有被使用，因为噪声较大
 
-- The accuracy of the predicted path created from sensor data depends on the accuracy of sensors attached to the ego vehicle.
+- The accuracy of the predicted path created from sensor data depends on the accuracy of sensors attached to the ego vehicle. 预测轨迹的准确性依赖于传感器精度
 
 ## Parameters
 
@@ -50,27 +52,27 @@ This module has following assumptions.
 
 ## Inner-workings / Algorithms
 
-AEB has the following steps before it outputs the emergency stop signal.
+AEB has the following steps before it outputs the emergency stop signal. 算法步骤
 
-1. Activate AEB if necessary.
+1. Activate AEB if necessary. 必要时使能AEB
 
-2. Generate a predicted path of the ego vehicle.
+2. Generate a predicted path of the ego vehicle. 生成预测轨迹
 
-3. Get target obstacles from the input point cloud.
+3. Get target obstacles from the input point cloud. 从输入点云中获取目标障碍物
+（最新版本这里增加了 预测障碍物的速度）
+4. Collision check with target obstacles. 与障碍物的碰撞检测
 
-4. Collision check with target obstacles.
-
-5. Send emergency stop signals to `/diagnostics`.
+5. Send emergency stop signals to `/diagnostics`. 发送急停指令到对应话题
 
 We give more details of each section below.
 
 ### 1. Activate AEB if necessary
 
-We do not activate AEB module if it satisfies the following conditions.
+We do not activate AEB module if it satisfies the following conditions. 以下情况不启动AEB
 
-- Ego vehicle is not in autonomous driving state
+- Ego vehicle is not in autonomous driving state 非自动驾驶模式
 
-- When the ego vehicle is not moving (Current Velocity is very low)
+- When the ego vehicle is not moving (Current Velocity is very low) 车辆未移动（速度非常低）
 
 ### 2. Generate a predicted path of the ego vehicle
 
@@ -82,33 +84,33 @@ y_{k+1} = y_k + v sin(\theta_k) dt \\
 \theta_{k+1} = \theta_k + \omega dt
 $$
 
-where $v$ and $\omega$ are current longitudinal velocity and angular velocity respectively. $dt$ is time interval that users can define in advance.
+where $v$ and $\omega$ are current longitudinal velocity and angular velocity respectively. $dt$ is time interval that users can define in advance. 用IMU轨迹或MPC生成的轨迹，也可同时使用
 
 ### 3. Get target obstacles from the input point cloud
 
 After generating the ego predicted path, we select target obstacles from the input point cloud. This obstacle filtering has three major steps, which are rough filtering, noise filtering with clustering and rigorous filtering.
 
-#### Rough filtering
+#### Rough filtering 粗过滤
 
-In rough filtering step, we select target obstacle with simple filter. Create a search area up to a certain distance (default is half of the ego vehicle width plus the `path_footprint_extra_margin` parameter) away from the predicted path of the ego vehicle and ignore the point cloud that are not within it. The image of the rough filtering is illustrated below.
+In rough filtering step, we select target obstacle with simple filter. Create a search area up to a certain distance (default is half of the ego vehicle width plus the `path_footprint_extra_margin` parameter) away from the predicted path of the ego vehicle and ignore the point cloud that are not within it. The image of the rough filtering is illustrated below. 划定一个检测区域
 
 ![rough_filtering](./image/obstacle_filtering_1.drawio.svg)
 
-#### Noise filtering with clustering and convex hulls
+#### Noise filtering with clustering and convex hulls 基于聚类和凸包的噪声过滤
 
-To prevent the AEB from considering noisy points, euclidean clustering is performed on the filtered point cloud. The points in the point cloud that are not close enough to other points to form a cluster are discarded. The parameters `cluster_tolerance`, `minimum_cluster_size` and `maximum_cluster_size` can be used to tune the clustering and the size of objects to be ignored, for more information about the clustering method used by the AEB module, please check the official documentation on euclidean clustering of the PCL library: <https://pcl.readthedocs.io/projects/tutorials/en/master/cluster_extraction.html>.
+To prevent the AEB from considering noisy points, euclidean clustering is performed on the filtered point cloud. The points in the point cloud that are not close enough to other points to form a cluster are discarded. The parameters `cluster_tolerance`, `minimum_cluster_size` and `maximum_cluster_size` can be used to tune the clustering and the size of objects to be ignored, for more information about the clustering method used by the AEB module, please check the official documentation on euclidean clustering of the PCL library: <https://pcl.readthedocs.io/projects/tutorials/en/master/cluster_extraction.html>. 调整聚类参数
 
-Furthermore, a 2D convex hull is created around each detected cluster, the vertices of each hull represent the most extreme/outside points of the cluster. These vertices are then checked in the next step.
+Furthermore, a 2D convex hull is created around each detected cluster, the vertices of each hull represent the most extreme/outside points of the cluster. These vertices are then checked in the next step. 此外，在聚类边缘创建2D凸包，用于表示障碍物边沿
 
-#### Rigorous filtering
+#### Rigorous filtering 细筛选
 
-After Noise filtering, it performs a geometric collision check to determine whether the filtered obstacles/hull vertices actually have possibility to collide with the ego vehicle. In this check, the ego vehicle is represented as a rectangle, and the point cloud obstacles are represented as points. Only the vertices with a possibility of collision are kept.
+After Noise filtering, it performs a geometric collision check to determine whether the filtered obstacles/hull vertices actually have possibility to collide with the ego vehicle. In this check, the ego vehicle is represented as a rectangle, and the point cloud obstacles are represented as points. Only the vertices with a possibility of collision are kept. 自车以矩形表示，障碍物以点表示，进行几何碰撞检测
 
 ![rigorous_filtering](./image/obstacle_filtering_2.drawio.svg)
 
-Finally, the vertex that is closest to the ego vehicle is chosen as the candidate for collision checking: Since rss distance is used to judge if a collision will happen or not, if the closest vertex to the ego is deemed to be safe, the rest of the vertices (and the points in the clusters) will also be safe.
+Finally, the vertex that is closest to the ego vehicle is chosen as the candidate for collision checking: Since rss distance is used to judge if a collision will happen or not, if the closest vertex to the ego is deemed to be safe, the rest of the vertices (and the points in the clusters) will also be safe. 判断最近的点和车辆是否是安全的
 
-#### Obstacle velocity estimation
+#### Obstacle velocity estimation 障碍物速度估计
 
 Once the position of the closest obstacle/point is determined, the AEB modules uses the history of previously detected objects to estimate the closest object speed using the following equations:
 
@@ -135,18 +137,18 @@ $$
 where $yaw_{diff}$ is the difference in yaw between the ego path and the displacement vector $$v_{pos} = o_{pos} - prev_{pos} $$ and $v_{ego}$ is the ego's speed, which accounts for the movement of points caused by the ego moving and not the object.
 All these equations are performed disregarding the z axis (in 2D).
 
-### 4. Collision check with target obstacles
+### 4. Collision check with target obstacles 与障碍物碰撞检测
 
-In the fourth step, it checks the collision with filtered obstacles using RSS distance. RSS is formulated as:
+In the fourth step, it checks the collision with filtered obstacles using RSS distance. RSS is formulated as: RSS距离
 
 $$
 d = v_{ego}*t_{response} + v_{ego}^2/(2*a_{min}) - v_{obj}^2/(2*a_{obj_{min}}) + offset
 $$
 
-where $v_{ego}$ and $v_{obj}$ is current ego and obstacle velocity, $a_{min}$ and $a_{obj_{min}}$ is ego and object minimum acceleration (maximum deceleration), $t_{response}$ is response time of the ego vehicle to start deceleration. Therefore the distance from the ego vehicle to the obstacle is smaller than this RSS distance $d$, the ego vehicle send emergency stop signals. This is illustrated in the following picture.
+where $v_{ego}$ and $v_{obj}$ is current ego and obstacle velocity, $a_{min}$ and $a_{obj_{min}}$ is ego and object minimum acceleration (maximum deceleration), $t_{response}$ is response time of the ego vehicle to start deceleration. Therefore the distance from the ego vehicle to the obstacle is smaller than this RSS distance $d$, the ego vehicle send emergency stop signals. This is illustrated in the following picture. 当车与障碍物距离小于RSS，触发AEB信号
 
 ![rss_check](./image/rss_check.drawio.svg)
 
-### 5. Send emergency stop signals to `/diagnostics`
+### 5. Send emergency stop signals to `/diagnostics` 发送信号
 
 If AEB detects collision with point cloud obstacles in the previous step, it sends emergency signal to `/diagnostics` in this step. Note that in order to enable emergency stop, it has to send ERROR level emergency. Moreover, AEB user should modify the setting file to keep the emergency level, otherwise Autoware does not hold the emergency state.

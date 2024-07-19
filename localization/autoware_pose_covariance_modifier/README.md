@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This package makes it possible to use GNSS and NDT poses together in real time localization.
+This package makes it possible to use GNSS and NDT poses together in real time localization. 基于GNSS+NDT估计的实时定位
 
 ## Function
 
@@ -26,9 +26,9 @@ It outputs a single pose with covariance:
 ## Requirements
 
 - The GNSS/INS module must provide standard deviation values (its error / RMSE) for the position and orientation.
-- It probably needs RTK support to provide accurate position and orientation information.
-- You need to have a geo-referenced map.
-- GNSS/INS module and the base_link frame must be calibrated well enough.
+- It probably needs RTK support to provide accurate position and orientation information. 需要RTK支持
+- You need to have a geo-referenced map. 需要地理参考地图
+- GNSS/INS module and the base_link frame must be calibrated well enough. 在统一的坐标系下
 - In an environment where GNSS/INS and NDT systems work well, the `base_link` poses from both systems should be close to
   each other.
 

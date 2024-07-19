@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The `ground_segmentation` is a node that remove the ground points from the input pointcloud.
+The `ground_segmentation` is a node that remove the ground points from the input pointcloud. 过滤地面
 
 ## Inner-workings / Algorithms
 

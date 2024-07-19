@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This package is responsible for estimating acceleration using the output of `ekf_localizer`. It uses lowpass filter to mitigate the noise.
+This package is responsible for estimating acceleration using the output of `ekf_localizer`. It uses lowpass filter to mitigate the noise. 加速度估计，用低通滤波去过滤噪声
 
 ## Inputs / Outputs
 

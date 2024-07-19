@@ -3,6 +3,7 @@
 ## Purpose
 
 `external_cmd_selector` is the package to publish `external_control_cmd`, `gear_cmd`, `hazard_lights_cmd`, `heartbeat` and `turn_indicators_cmd`, according to the current mode, which is `remote` or `local`.
+本地驾驶和远程驾驶，控制指令、挡位、灯光、心跳等
 
 The current mode is set via service, `remote` is remotely operated, `local` is to use the values calculated by Autoware.
 

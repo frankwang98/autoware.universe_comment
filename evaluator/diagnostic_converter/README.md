@@ -3,7 +3,7 @@
 ## Purpose
 
 This package provides a node to convert `diagnostic_msgs::msg::DiagnosticArray` messages
-into `tier4_simulation_msgs::msg::UserDefinedValue` messages.
+into `tier4_simulation_msgs::msg::UserDefinedValue` messages. 将故障消息转到仿真里的自定义消息？
 
 ## Inner-workings / Algorithms
 
@@ -11,7 +11,7 @@ The node subscribes to all topics listed in the parameters and assumes they publ
 `DiagnosticArray` messages.
 Each time such message is received,
 it is converted into as many `UserDefinedValue` messages as the number of `KeyValue` objects.
-The format of the output topic is detailed in the _output_ section.
+The format of the output topic is detailed in the _output_ section. 故障消息也是转成键值对了
 
 ## Inputs / Outputs
 

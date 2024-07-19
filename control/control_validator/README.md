@@ -1,6 +1,6 @@
 # Control Validator
 
-The `control_validator` is a module that checks the validity of the output of the control component. The status of the validation can be viewed in the `/diagnostics` topic.
+The `control_validator` is a module that checks the validity of the output of the control component. The status of the validation can be viewed in the `/diagnostics` topic. 检查控制模块输出的有效性
 
 ![control_validator](./image/control_validator.drawio.svg)
 

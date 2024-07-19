@@ -2,7 +2,7 @@
 
 ## Purpose / Use cases
 
-The longitudinal_controller computes the target acceleration to achieve the target velocity set at each point of the target trajectory using a feed-forward/back control.
+The longitudinal_controller computes the target acceleration to achieve the target velocity set at each point of the target trajectory using a feed-forward/back control. 基于反馈控制的方法计算加速度去达到轨迹点的目标速度
 
 It also contains a slope force correction that takes into account road slope information, and a delay compensation function.
 It is assumed that the target acceleration calculated here will be properly realized by the vehicle interface.
@@ -16,13 +16,13 @@ Note that the use of this module is not mandatory for Autoware if the vehicle su
 This module has four state transitions as shown below in order to handle special processing in a specific situation.
 
 - **DRIVE**
-  - Executes target velocity tracking by PID control.
-  - It also applies the delay compensation and slope compensation.
+  - Executes target velocity tracking by PID control. PID循迹跟踪
+  - It also applies the delay compensation and slope compensation. 延迟补偿和斜率补偿
 - **STOPPING**
   - Controls the motion just before stopping.
-  - Special sequence is performed to achieve accurate and smooth stopping.
+  - Special sequence is performed to achieve accurate and smooth stopping. 急停中
 - **STOPPED**
-  - Performs operations in the stopped state (e.g. brake hold)
+  - Performs operations in the stopped state (e.g. brake hold) 保持急停
 - **EMERGENCY**.
   - Enters an emergency state when certain conditions are met (e.g., when the vehicle has crossed a certain distance of a stop line).
   - The recovery condition (whether or not to keep emergency state until the vehicle completely stops) or the deceleration in the emergency state are defined by parameters.
@@ -33,17 +33,17 @@ The state transition diagram is shown below.
 
 ### Logics
 
-#### Control Block Diagram
+#### Control Block Diagram 控制模块流程
 
 ![LongitudinalControllerDiagram](./media/LongitudinalControllerDiagram.drawio.svg)
 
-#### FeedForward (FF)
+#### FeedForward (FF) 反馈控制
 
 The reference acceleration set in the trajectory and slope compensation terms are output as a feedforward. Under ideal conditions with no modeling error, this FF term alone should be sufficient for velocity tracking.
 
 Tracking errors causing modeling or discretization errors are removed by the feedback control (now using PID).
 
-##### Brake keeping
+##### Brake keeping 刹车保持
 
 From the viewpoint of ride comfort, stopping with 0 acceleration is important because it reduces the impact of braking. However, if the target acceleration when stopping is 0, the vehicle may cross over the stop line or accelerate a little in front of the stop line due to vehicle model error or gradient estimation error.
 
@@ -51,7 +51,7 @@ For reliable stopping, the target acceleration calculated by the FeedForward sys
 
 ![BrakeKeepingDiagram](./media/BrakeKeeping.drawio.svg)
 
-#### Slope compensation
+#### Slope compensation 斜率补偿
 
 Based on the slope information, a compensation term is added to the target acceleration.
 
@@ -79,7 +79,7 @@ Note: The angle of the slope is defined as positive for an uphill slope, while t
 
 ![slope_definition](./media/slope_definition.drawio.svg)
 
-#### PID control
+#### PID control 控制算法
 
 For deviations that cannot be handled by FeedForward control, such as model errors, PID control is used to construct a feedback system.
 

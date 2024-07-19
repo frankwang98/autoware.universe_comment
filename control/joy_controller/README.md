@@ -2,7 +2,7 @@
 
 ## Role
 
-`joy_controller` is the package to convert a joy msg to autoware commands (e.g. steering wheel, shift, turn signal, engage) for a vehicle.
+`joy_controller` is the package to convert a joy msg to autoware commands (e.g. steering wheel, shift, turn signal, engage) for a vehicle. 转向、挡位、灯光等指令用joy模拟
 
 ## Usage
 

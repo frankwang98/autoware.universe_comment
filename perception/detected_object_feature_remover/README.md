@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The `detected_object_feature_remover` is a package to convert topic-type from `DetectedObjectWithFeatureArray` to `DetectedObjects`.
+The `detected_object_feature_remover` is a package to convert topic-type from `DetectedObjectWithFeatureArray` to `DetectedObjects`. 转换话题类型
 
 ## Inner-workings / Algorithms
 

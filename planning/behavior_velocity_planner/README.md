@@ -2,7 +2,7 @@
 
 ## Overview
 
-`behavior_velocity_planner` is a planner that adjust velocity based on the traffic rules.
+`behavior_velocity_planner` is a planner that adjust velocity based on the traffic rules. 行为速度规划器，根据交通规则来调整速度
 It loads modules as plugins. Please refer to the links listed below for detail on each module.
 
 ![Architecture](./docs/BehaviorVelocityPlanner-Architecture.drawio.svg)

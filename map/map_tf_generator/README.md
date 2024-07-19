@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The nodes in this package broadcast the `viewer` frame for visualization of the map in RViz.
+The nodes in this package broadcast the `viewer` frame for visualization of the map in RViz. 在rviz中可视化地图
 
 Note that there is no module to need the `viewer` frame and this is used only for visualization.
 

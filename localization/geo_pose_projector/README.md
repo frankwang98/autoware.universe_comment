@@ -3,6 +3,7 @@
 ## Overview
 
 This node is a simple node that subscribes to the geo-referenced pose topic and publishes the pose in the map frame.
+订阅定位状态并显示在地图中
 
 ## Subscribed Topics
 

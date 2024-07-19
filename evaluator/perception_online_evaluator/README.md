@@ -1,23 +1,23 @@
 # Perception Evaluator
 
-A node for evaluating the output of perception systems.
+A node for evaluating the output of perception systems. 评价感知系统输出效果
 
 ## Purpose
 
-This module allows for the evaluation of how accurately perception results are generated without the need for annotations. It is capable of confirming performance and can evaluate results from a few seconds prior, enabling online execution.
+This module allows for the evaluation of how accurately perception results are generated without the need for annotations. It is capable of confirming performance and can evaluate results from a few seconds prior, enabling online execution. 评价感知的精度
 
 ## Inner-workings / Algorithms
 
 The evaluated metrics are as follows:
 
-- predicted_path_deviation
-- predicted_path_deviation_variance
-- lateral_deviation
-- yaw_deviation
-- yaw_rate
-- total_objects_count
-- average_objects_count
-- interval_objects_count
+- predicted_path_deviation 预测轨迹偏差
+- predicted_path_deviation_variance 预测轨迹偏差方差
+- lateral_deviation 横向偏差
+- yaw_deviation 航向角偏差
+- yaw_rate 角速度
+- total_objects_count 障碍物个数
+- average_objects_count 平均障碍物个数
+- interval_objects_count 间隔障碍物个数
 
 ### Predicted Path Deviation / Predicted Path Deviation Variance
 

@@ -3,6 +3,7 @@
 ## Purpose
 
 The `gnss_poser` is a node that subscribes gnss sensing messages and calculates vehicle pose with covariance.
+订阅gnss消息和计算车辆位姿
 
 This node subscribes to NavSatFix to publish the pose of **base_link**. The data in NavSatFix represents the antenna's position. Therefore, it performs a coordinate transformation using the tf from `base_link` to the antenna's position. The frame_id of the antenna's position refers to NavSatFix's `header.frame_id`.
 (**Note that `header.frame_id` in NavSatFix indicates the antenna's frame_id, not the Earth or reference ellipsoid.** [See also NavSatFix definition.](https://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/NavSatFix.html))

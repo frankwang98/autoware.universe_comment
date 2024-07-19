@@ -7,7 +7,7 @@
 
 # Smart MPC Trajectory Follower
 
-Smart MPC (Model Predictive Control) is a control algorithm that combines model predictive control and machine learning. While inheriting the advantages of model predictive control, it solves its disadvantage of modeling difficulty with a data-driven method using machine learning.
+Smart MPC (Model Predictive Control) is a control algorithm that combines model predictive control and machine learning. While inheriting the advantages of model predictive control, it solves its disadvantage of modeling difficulty with a data-driven method using machine learning. 融合了MPC和机器学习的控制算法，继承了两者的优点
 
 This technology makes it relatively easy to operate model predictive control, which is expensive to implement, as long as an environment for collecting data can be prepared.
 
@@ -35,7 +35,7 @@ pip3 install -U .
 
 This package provides smart MPC logic for path-following control as well as mechanisms for learning and evaluation. These features are described below.
 
-### Trajectory following control based on iLQR/MPPI
+### Trajectory following control based on iLQR/MPPI 基于iLQR/MPPI的轨迹跟踪
 
 The control mode can be selected from "ilqr", "mppi", or "mppi_ilqr", and can be set as `mpc_parameter:system:mode` in [mpc_param.yaml](./smart_mpc_trajectory_follower/param/mpc_param.yaml).
 In "mppi_ilqr" mode, the initial value of iLQR is given by the MPPI solution.
@@ -52,7 +52,7 @@ ros2 launch autoware_launch planning_simulator.launch.xml map_path:=$HOME/autowa
 > [!NOTE]
 > When running with the nominal model set in [nominal_param.yaml](./smart_mpc_trajectory_follower/param/nominal_param.yaml), set `trained_model_parameter:control_application:use_trained_model` to `false` in [trained_model_param.yaml](./smart_mpc_trajectory_follower/param/trained_model_param.yaml). To run using the trained model, set `trained_model_parameter:control_application:use_trained_model` to `true`, but the trained model must have been generated according to the following procedure.
 
-### Training of model and reflection in control
+### Training of model and reflection in control 控制中的模型训练
 
 To obtain training data, start autoware, perform a drive, and record rosbag data with the following commands.
 

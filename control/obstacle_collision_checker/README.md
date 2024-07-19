@@ -2,7 +2,7 @@
 
 ## Purpose
 
-`obstacle_collision_checker` is a module to check obstacle collision for predicted trajectory and publish diagnostic errors if collision is found.
+`obstacle_collision_checker` is a module to check obstacle collision for predicted trajectory and publish diagnostic errors if collision is found. 障碍物碰撞检测
 
 ## Inner-workings / Algorithms
 
@@ -47,7 +47,7 @@ stop
 
 ### Check data
 
-Check that `obstacle_collision_checker` receives no ground pointcloud, predicted_trajectory, reference trajectory, and current velocity data.
+Check that `obstacle_collision_checker` receives no ground pointcloud, predicted_trajectory, reference trajectory, and current velocity data. 去地面点云、预测轨迹、参考轨迹、当前速度
 
 ### Diagnostic update
 

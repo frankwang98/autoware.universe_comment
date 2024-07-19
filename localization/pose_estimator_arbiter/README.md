@@ -13,21 +13,21 @@ Table of contents:
 ## Abstract
 
 This package launches multiple pose estimators and provides the capability to stop or resume specific pose estimators based on the situation.
-It provides provisional switching rules and will be adaptable to a wide variety of rules in the future.
+It provides provisional switching rules and will be adaptable to a wide variety of rules in the future. 启动多个状态估计节点
 
 Please refer to [this discussion](https://github.com/orgs/autowarefoundation/discussions/3878) about other ideas on implementation.
 
-### Why do we need a stop/resume mechanism?
+### Why do we need a stop/resume mechanism? 为什么需要停止/恢复机制
 
 It is possible to launch multiple pose_estimators and fuse them using a Kalman filter by editing launch files.
-However, this approach is not preferable due to computational costs.
+However, this approach is not preferable due to computational costs. 计算资源限制
 
 Particularly, NDT and YabLoc are computationally intensive, and it's not recommended to run them simultaneously.
-Also, even if both can be activated at the same time, the Kalman Filter may be affected by one of them giving bad output.
+Also, even if both can be activated at the same time, the Kalman Filter may be affected by one of them giving bad output. 卡尔曼滤波后，可能会被影响导致错误输出
 
 > [!NOTE]
 > Currently, **there is ONLY A RULE implemented that always enables all pose_estimators.**
-> If users want to toggle pose_estimator with their own rules, they need to add new rules. by referring to example_rule.
+> If users want to toggle pose_estimator with their own rules, they need to add new rules. by referring to example_rule. 可以根据示例规则自己增改
 > The [example_rule](example_rule/README.md) has source code that can be used as a reference for implementing the rules.
 
 ### Supporting pose_estimators
